@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>leoproductsearch</name>
+	<displayName><![CDATA[Quick product search by category block]]></displayName>
+	<version><![CDATA[2.0]]></version>
+	<description><![CDATA[Adds a quick product search field to your website.]]></description>
+	<author><![CDATA[LeoTheme]]></author>
+	<tab><![CDATA[search_filter]]></tab>
+	<is_configurable>0</is_configurable>
+	<need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

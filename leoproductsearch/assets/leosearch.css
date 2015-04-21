@@ -1,0 +1,146 @@
+/* block top search */
+#search_block_top {
+	position:absolute;
+	right: 26%;
+    top: 34px;
+}
+#search_block_top p {padding:0;}
+#search_block_top #search_query_top {
+	padding:0 5px;
+	height:23px;
+	width:300px;/* 310 */
+	border:1px solid #666;
+	border-right: 0 !important;
+	color:#666;
+	background:url(img/bg_search_input.png) repeat-x 0 0 #fff;
+	float: left;
+}
+
+#search_block_top .button {
+	border:none;
+	border-radius:0;
+	color:#fff;
+	text-transform:uppercase;
+	background:url(img/bg_search_submit.png) repeat-x 0 0 #101010;
+	float: left;
+	height: 25px;
+}
+
+form#searchbox{padding-top:5px}
+form#searchbox label{color:#333;margin-bottom:1px}
+form#searchbox input#leo_search_query_block{
+	border: 1px solid #CCCCCC;
+	-webkit-border-radius:3px !important;
+	-moz-border-radius:3px !important;
+	border-radius:3px !important;
+    height: 18px;
+	margin-top:10px;
+}
+form#searchbox input#search_button{padding: 1px 4px;}
+
+/*	modal search  */
+#searchModal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255, 255, 255, 0.9);
+	z-index: 9999;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	cursor: zoom-out;
+	opacity: 0;
+}
+
+#searchModal.msearch-show {
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.msearch-container {
+	position: fixed;
+	top: 30px;
+	right: 50px;
+	left: 50px;
+	display: none;
+	cursor: default;
+}
+
+.msearch-close {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	cursor: pointer;
+	z-index: 2;
+}
+
+#searchModal.msearch-show .msearch-container {
+	display: block;
+}
+
+.searchHint {
+	margin: 18px 0;
+	font-weight: normal;
+	color: #777;
+}
+
+/* modal search form */
+#leosearchtopbox select,
+#leosearchtopbox input {
+	height: 80px;
+}
+
+#leosearchtopbox select {
+	font-size: 28px;
+	font-size: 1.75rem;
+    line-height: 1.2;
+    background: #F5F5F5 none repeat scroll 0% 0%;
+    border: medium none;
+    cursor: pointer;
+}
+
+#leosearchtopbox input {
+	font-size: 36px;
+	font-size: 2.25rem;
+}
+
+/* ac results */
+div.ac_results {
+	position: fixed;
+}
+
+div.ac_results li {
+	font-size: 20px;
+	font-size: 1.25rem;
+	line-height: 1;
+	padding: 5px;
+	cursor: pointer;
+}
+
+div.ac_results li.ac_even {
+	background: #ddd;
+}
+
+div.ac_results li.ac_over {
+	background: #eee;
+	color: #fff;
+}
+
+@media screen and (max-width: 991px) {
+	#searchModal,
+	.msearch-container,
+	div.ac_results {
+		position: absolute;
+	}
+
+	.msearch-container {
+		top: 20px;
+		right: 20px;
+		left: 20px;
+	}
+}
