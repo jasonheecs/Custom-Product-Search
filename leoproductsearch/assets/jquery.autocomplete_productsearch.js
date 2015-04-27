@@ -575,7 +575,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		list = $("<ul/>").appendTo(element).mouseover( function(event) {
 			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
 	            active = $("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
-			    $(target(event)).addClass(CLASSES.ACTIVE);            
+			    $(target(event)).addClass(CLASSES.ACTIVE);
 	        }
 		}).click(function(event) {
 			$(target(event)).addClass(CLASSES.ACTIVE);
@@ -698,7 +698,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			return this.visible() && (listItems.filter("." + CLASSES.ACTIVE)[0] || options.selectFirst && listItems[0]);
 		},
 		show: function() {
-			var offset = $(input).offset();
+			var offset = $(input).fixedPosition();
 			element.css({
 				width: typeof options.width == "string" || options.width > 0 ? options.width : ($(input).width() + parseInt($(input).css('padding-left')) + parseInt($(input).css('padding-right')) + parseInt($(input).css('margin-left')) + parseInt($(input).css('margin-right'))),
 				top: offset.top + input.offsetHeight,
@@ -754,6 +754,37 @@ $.Autocompleter.Selection = function(field, start, end) {
 		}
 	}
 	field.focus();
+};
+
+function Point(x, y) {
+    return {
+        'x': x,
+        'y': y,
+        'left': x,
+        'top': y
+    };
+}
+
+$.fn.outerOffset = function () {
+    /// <summary>Returns an element's offset relative to its outer size; i.e., the sum of its left and top margin, padding, and border.</summary>
+    /// <returns type="Object">Outer offset</returns>
+    var margin = this.margin();
+    var padding = this.padding();
+    var border = this.border();
+    return Point(
+        margin.left + padding.left + border.left,
+        margin.top + padding.top + border.top
+    );
+};
+
+
+$.fn.fixedPosition = function () {
+    /// <summary>Returns the "fixed" position of the element; i.e., the position relative to the browser window.</summary>
+    /// <returns type="Object">Object with 'x' and 'y' properties.</returns>
+    var offset = this.offset();
+    var $doc = $(document);
+    var bodyOffset = $(document.body).outerOffset();
+    return Point(offset.left - $doc.scrollLeft() + bodyOffset.left, offset.top - $doc.scrollTop() + bodyOffset.top);
 };
 
 })(jQuery);

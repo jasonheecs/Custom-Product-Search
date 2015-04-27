@@ -92,6 +92,7 @@ var ModalSearch = (function($) {
 
 	function hideModal() {
 		$modalContainer.removeClass("msearch-show");
+		$("#leo_search_query_top").val("");
 	}
 
 	function init() {
@@ -103,8 +104,21 @@ var ModalSearch = (function($) {
 				$("#leo_search_query_top").val("").focus();
 			});
 
+			//	Conditions to close modal
 			$modalContainer.find(".msearch-close").click(function() {
 				hideModal();
+			});
+			$modalContainer.on({
+				click: function(e) {
+					if (e.target === this) {
+						hideModal();
+					}
+				},
+				keypress: function(e) {
+					if(e.which === 0) { //ESC key
+						hideModal();
+					}
+				}
 			});
 		});
 	}

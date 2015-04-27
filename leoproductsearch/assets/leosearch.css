@@ -111,7 +111,7 @@ form#searchbox input#search_button{padding: 1px 4px;}
 
 /* ac results */
 div.ac_results {
-	position: fixed;
+	position: fixed !important;
 }
 
 div.ac_results li {
@@ -132,12 +132,6 @@ div.ac_results li.ac_over {
 }
 
 @media screen and (max-width: 991px) {
-	#searchModal,
-	.msearch-container,
-	div.ac_results {
-		position: absolute;
-	}
-
 	.msearch-container {
 		top: 20px;
 		right: 20px;

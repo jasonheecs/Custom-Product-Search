@@ -46,7 +46,7 @@ class LeoProductSearch extends Module
 
 	public function install()
 	{
-		if (!parent::install() || !$this->registerHook('top') ||!$this->registerHook('header') || !$this->registerHook('displayMobileTopSiteMap'))
+		if (!parent::install() || !$this->registerHook('top') ||!$this->registerHook('header') || !$this->registerHook('displayMobileTopSiteMap') || !$this->registerHook('displayFooter'))
 			return false;
 		$this->_installDataSample();
 		return true;
@@ -75,6 +75,7 @@ class LeoProductSearch extends Module
 		if (Configuration::get('PS_SEARCH_AJAX'))
 		{
 			$this->context->controller->addJS(($this->_path).'assets/jquery.autocomplete_productsearch.js');
+			$this->context->controller->addJS(($this->_path).'assets/jquery.sizes.js');
 			$this->context->controller->addCSS(($this->_path).'assets/jquery.autocomplete_productsearch.css');
 			Media::addJsDef(array('search_url' => $this->context->link->getModuleLink('leoproductsearch','productsearch', array(), Tools::usingSecureMode())));
 			$this->context->controller->addJS(($this->_path).'assets/leosearch.js');
@@ -104,8 +105,18 @@ class LeoProductSearch extends Module
 	}
 
 	public function hookTop($params)
+	{ 
+		return $this->display(__FILE__, 'leosearch_top.tpl');
+	}
+	
+	public function hookDisplayNav($params)
 	{
-		if (Tools::getValue('search_query') || !$this->isCached('leosearch_top.tpl', $this->getCacheId()))
+		return $this->hookTop($params);
+	}
+
+	public function hookFooter($params)
+	{
+		if (Tools::getValue('search_query') || !$this->isCached('leosearch_bottom.tpl', $this->getCacheId()))
 		{
 			$this->calculHookCommon($params);
 			$this->smarty->assign(array(
@@ -118,12 +129,7 @@ class LeoProductSearch extends Module
 		}
 		Media::addJsDef(array('blocksearch_type' => 'top'));
 		$search_query = (string)Tools::getValue('search_query');
-		return $this->display(__FILE__, 'leosearch_top.tpl', Tools::getValue('search_query') ? null : $this->getCacheId());
-	}
-	
-	public function hookDisplayNav($params)
-	{
-		return $this->hookTop($params);
+		return $this->display(__FILE__, 'leosearch_bottom.tpl', Tools::getValue('search_query') ? null : $this->getCacheId());
 	}
 
 	private function calculHookCommon($params)
